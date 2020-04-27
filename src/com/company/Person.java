@@ -43,7 +43,7 @@ public class Person {
         if(surname.isEmpty() || surname.isBlank())
             throw new Exception("Mbiemri nuk duhet te jete i zbrazet");
         else{
-            this.surname = name;
+            this.surname = surname;
         }
 
     }
