@@ -9,6 +9,7 @@ public class MarriageCertificate extends Document {
     private LocalDate marriageDate;
 
 
+
     public MarriageCertificate(){
 
     }
@@ -23,7 +24,7 @@ public class MarriageCertificate extends Document {
         certificate.setMarriageDate(LocalDate.now());
         certificate.setIssueInstitution("MPB");
         certificate.setMunicipality(City.PRISHTINA);
-
+        certificate.setIssuedPlace("ARC Prishtine");
         return certificate;
     }
 
