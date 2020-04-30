@@ -53,11 +53,10 @@ public class Person {
     }
 
     public void setPersonalNo(int personalNo) throws Exception {
-        int length = String.valueOf(personalNo).length();
-        if (length == 10)
+        if (personalNo > 999999999 && personalNo <2000000000)
         this.personalNo = personalNo;
         else{
-            throw new Exception("Numri personal duhet ti kete 10 shifra");
+            throw new Exception("Numri personal duhet ti te jete  shifra");
         }
     }
 
