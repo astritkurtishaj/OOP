@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.exceptions.NumberNotInRangeException;
+import com.company.exceptions.StringEmptyException;
+
 import java.time.LocalDate;
 
 public class BirthCertificateDocumentManager {
@@ -10,7 +13,7 @@ public class BirthCertificateDocumentManager {
         this.documentManager = manager;
     }
 
-    public void showMenu() {
+    public void showMenu() throws NumberNotInRangeException, StringEmptyException {
         System.out.println("-------------------------------------");
         System.out.println("Type 1 to add new birth certificate");
         System.out.println("Type 2 to print your birth certificate");
@@ -41,7 +44,7 @@ public class BirthCertificateDocumentManager {
 
     private void findAndRemoveCertificate() {
         System.out.println("Shenoni numrin personl te personit.");
-        var searchPersonalNo = KeyboardScanner.readInteger();
+        int searchPersonalNo = KeyboardScanner.readInteger();
 
         BirthCertificate certificate = findBirthCertificate(searchPersonalNo);
 
@@ -123,7 +126,7 @@ public class BirthCertificateDocumentManager {
 
     }
 
-    private void createBirthCertificate() {
+    private void createBirthCertificate() throws NumberNotInRangeException, StringEmptyException {
         System.out.println("Shenoni emrin personit");
         var name = KeyboardScanner.validateInputString("Emri i personit eshte gabim, shenoni perseri.");
         //prof keshtu mundet me u validu te dhenat ndoshta me mire qe mos me lan me tajkalu userin
@@ -134,6 +137,8 @@ public class BirthCertificateDocumentManager {
 
         System.out.println("Shenoni numrin personal te personit");
         var personalNo = KeyboardScanner.readInteger();
+        if(personalNo <1000000000 || personalNo >2000000000)
+            throw new NumberNotInRangeException("Numri nuk eshte ne rangun prej 1,000,000,000 deri 2,000,000,000 ");
 
         System.out.println("Shenoni gjinine personit (M ose F):");
         var gender = KeyboardScanner.readString();
@@ -141,17 +146,24 @@ public class BirthCertificateDocumentManager {
         System.out.println("Shenoni nacionalitetin e personit (KOSOVAR, TURK, BOSHNJAK, ROM, OSE GORAN): ");
         var nationality = KeyboardScanner.readString();
 
+
         System.out.println("Shenoni daten e lindjes se personit (yyyy-mm-dd): ");
         String birthdate = KeyboardScanner.readString();
 
         System.out.println("Shenoni vendin e lindjes se personit: ");
         String birthplace = KeyboardScanner.readString();
+        if(birthdate.equals("") || birthplace.trim().equals(""))
+            throw new StringEmptyException("Teksti nuk duhet te jete i zbrazet");
 
         System.out.println("Shenoni emrin e babait: ");
         String father = KeyboardScanner.readString();
+        if(father.equals("") || father.trim().equals(""))
+            throw new StringEmptyException("Emri nuk duhet te jete i zbrazet");
 
         System.out.println("Shenoni emrin e nenes: ");
         String mother = KeyboardScanner.readString();
+        if(mother.equals("") || mother.trim().equals(""))
+            throw new StringEmptyException("Emri nuk duhet te jete i zbrazet");
 
        try{
            var person = new Person(name,surname,personalNo,GenderBuild.create(gender), Nationality.valueOf(nationality), LocalDate.parse(birthdate), birthplace);
@@ -164,4 +176,6 @@ public class BirthCertificateDocumentManager {
            System.out.println(ex.getMessage());
        }
     }
+
+
 }

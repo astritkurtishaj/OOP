@@ -1,13 +1,16 @@
 package com.company;
 
 
+import com.company.exceptions.NumberNotInRangeException;
+import com.company.exceptions.StringEmptyException;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class WorkShop2Main {
     public static DocumentManager docManager = new DocumentManager();
     public static Scanner user = new Scanner(System.in);
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NumberNotInRangeException, StringEmptyException {
 
         System.out.println("Sistemi per menaxhimin online te dokumenteve.");
 
@@ -17,7 +20,7 @@ public class WorkShop2Main {
     }
 
 
-    public static void showMenu() {
+    public static void showMenu() throws NumberNotInRangeException, StringEmptyException {
         System.out.println("-------------------------------------");
         System.out.println("Type 1 to Manage birth certificates");
         System.out.println("Type 2 to Manage residence certificates");
