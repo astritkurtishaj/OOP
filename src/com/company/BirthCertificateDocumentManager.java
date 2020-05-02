@@ -65,7 +65,6 @@ public class BirthCertificateDocumentManager {
                 return doc;
             }
         }
-
         return null;
     }
 
